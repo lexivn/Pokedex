@@ -1,0 +1,29 @@
+/* -----GENERAL BODY----- */
+body {
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+main {
+    width: 90%;
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+/* -------HEADER------ */
+.page-header {
+    display: flex;
+    width: 100%;
+    padding: 5px;
+    border-bottom: #d3d3d3 solid;    
+}
+.page-header__title {
+    margin: 0 auto;
+}
