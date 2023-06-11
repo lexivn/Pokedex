@@ -30,7 +30,7 @@ let pokBigmsg = "";
 let pokname = "";
 let pokheigth = 0;
 
-for (i=0; i < pokemonList.length; i++ ) {
+for (let i = 0; i < pokemonList.length; i++ ) {
     pokBigmsg = "";
     pokname = pokemonList[i].name;
     pokheigth = pokemonList[i].height;
