@@ -6,24 +6,39 @@ let pokemonList = [
     },
     {
         name: 'Igglybuff',
-        height: 6,
+        height: 5.6,
         types: ['normal', 'fairy']
     },
     {
         name: 'Charizard',
-        height: 5,
+        height: 0.5,
         types: ['fire', 'flying']
     },
     {
         name: 'Dragonite',
-        height: 4,
+        height: 2.4,
         types: ['dragon', 'flying']
     },
     {
         name: 'Gastly',
-        height: 3,
+        height: 0.3,
         types: ['ghost', 'posion']
     }
 ];
 
+let pokBigmsg = "";
+let pokname = "";
+let pokheigth = 0;
+
+for (i=0; i < pokemonList.length; i++ ) {
+    pokBigmsg = "";
+    pokname = pokemonList[i].name;
+    pokheigth = pokemonList[i].height;
+    
+    if (pokheigth >= 7){
+        pokBigmsg = " - Wow, that's big!";
+    }
+    
+    document.write(`${pokname} ( height: ${pokheigth}) ${pokBigmsg} <br>`);
+}
 
