@@ -1,0 +1,95 @@
+FUNCTIONS PART 2
+================
+
+	forEach() Loops
+	===============
+	
+	let array = [1, 2, 3, 4];
+	array.forEach((item, i, arr) => console.log(i, item, arr));
+	
+	0 1 (4) [1, 2, 3, 4]
+	1 2 (4) [1, 2, 3, 4]
+	2 3 (4) [1, 2, 3, 4]
+	3 4 (4) [1, 2, 3, 4]
+	
+	Examples:
+	Using forEach with:
+	
+	let myArray = [1,2,3,4,5,6,7,8,9,10,11,12];
+	
+	// External function
+	myArray.forEach(logToConsole);
+	
+	function logToConsole(item) {
+		console.log(item);
+	}
+	
+	// internal anonymous function
+		myArray.forEach(function(item) {
+			console.log(item);
+	});
+	
+	// arrow function
+	myArray.forEach( item => console.log(item));
+	
+	
+	
+	Object.keys()
+	=============
+	Very used in conbination with forEach()
+	
+	let anne = {
+	  name: 'Anne',
+	  age: 38,
+	  children: []
+	};
+
+	Object.keys(anne).forEach(function(property) {
+	  console.log(anne[property]);
+	});
+	
+	Functional Programming
+	======================
+	It is called a "programming paradigm" a way to think about how your code should be structure and how different parts of your code should interact with each other.
+		Both Functional Programming(FP) and Object-Oriented Programming (OPP) are programming paradigms.
+		FP and OOP are two ways to build your code, and they both come with their own pros and cons.
+		
+		PURE FUNCTIONS
+		
+		IMMUTABILITY:
+		-------------
+		Means that once a value is assigned to something, that won't change. Like pure functions, imutability" eliminates side-effects.
+		 
+		 * how can you make a variable immutable?
+			Retaining the original state while creating a new one on top that holds the change.
+			
+		
+		AVOIDING SHARED STATE:
+		---------------------
+		Avoiding shared stte With global variables for instance or any other variable that area accessed in multiple functions. Why should this be avoided?
+			* It's difficult to keep the state correct since many functions have direct access to it.
+			
+			* This type of code is ofter the hardest to refactor and often to read. You can not trust the local method because this is just one part of the program.
+		
+		
+	
+	 IMMEDIATLELY INVOKED FUNCTION EXPRESION (or IIFE)
+	 =================================================
+	 When you use external code like jQuery (which you’ll work with later in the Achievement), this code will actually set some global variables. If you happen to use variables that use the same names as those in the imported external code, one of the two is going to stop working: either your own code or the imported code.
+	 
+	 
+	 (function () {
+	  let data = {};
+	  // put your code in here
+	})();
+		
+		
+	(function() {
+		let myArray = [1,2,3,4,5,6,7,8,9,10,11,12];
+		
+		let str = '';
+		
+		myArray.forEach( item => str += `<div>I am div $(item)</div>`);
+		document.getElementBId("container").innerHTML = str;
+	
+	})()
