@@ -1,5 +1,5 @@
-
-pokemonRepository = (function(){
+// IIFE 
+pokemonRepository = (function () {
     let pokemonList = [
         {
             name: 'Bulbasaur',
@@ -30,9 +30,9 @@ pokemonRepository = (function(){
     ];
 
     function add(item) {
-        if(typeof(item) === "object") {
+        if (typeof (item) === "object") {
             if (Object.keys(item) === Object.keys(pokemonList[0]))
-            pokemonList.push(item);
+                pokemonList.push(item);
         }
     }
 
@@ -40,23 +40,43 @@ pokemonRepository = (function(){
         return pokemonList;
     }
 
+    function addListItem(pokemon) {
+
+        let container = document.querySelector('.pokemon-list');        // Taking the element <ul> using the class ".pokemon-list"
+        let listItem = document.createElement('li');                    // Creating the <li> element
+
+        let button = document.createElement('button');                  // Creating the button element
+        button.innerText = pokemon.name;                                // Giving the "Pokemon's name" to the button
+        button.classList.add('pokemon-list__item');                     // Appliying a the class "pokemon-list__item" to the button
+
+        listItem.appendChild(button);                                   // Appending the button to the list <li> as a child
+        container.appendChild(listItem);                                // Appending the <li> elements to the unordered list <ul> as its child
+
+        button.addEventListener('click', showDetails);                  // Creating the event handler
+
+    }
+
+    function showDetails(event) {
+        console.log(event);
+    }
+
     return {
         getAll: getAll,
-        add: add        
+        add: add,
+        addListItem: addListItem
+        
     };
-    
+
 })();
+
+//pokemonRepository.add({ name: "Pikachu", height: 0.3, types: ["electric"] });   // Fix it
 
 pokemonList = pokemonRepository.getAll();
 
-pokemonList.forEach( pokemon => {
-    let bigPokemon = '';
-    if(pokemon.height >= 7)
-    {
-        bigPokemon = " - Wohm, that's big!";
-    }
+pokemonList.forEach(pokemon => {
 
-    document.write(`${pokemon.name} (height: ${pokemon.height}) ${bigPokemon} <br>`);
+    pokemonRepository.addListItem(pokemon);
+
 });
 
 
