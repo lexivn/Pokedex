@@ -27,3 +27,12 @@ h1 {
 .page-header__title {
     margin: 0 auto;
 }
+
+/* -------MAIN------ */
+.pokemon-list {
+    list-style: none;
+}
+.pokemon-list__item {    
+    border: none;   
+
+}
