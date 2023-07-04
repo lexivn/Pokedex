@@ -1,38 +1,16 @@
 // IIFE 
 pokemonRepository = (function () {
-    let pokemonList = [
-        {
-            name: 'Bulbasaur',
-            height: 7,
-            types: ['grass', 'poison']
-        },
-        {
-            name: 'Igglybuff',
-            height: 5.6,
-            types: ['normal', 'fairy']
-        },
-        {
-            name: 'Charizard',
-            height: 0.5,
-            types: ['fire', 'flying']
-        },
-        {
-            name: 'Dragonite',
-            height: 2.4,
-            types: ['dragon', 'flying']
-        },
-        {
-            name: 'Gastly',
-            height: 0.3,
-            types: ['ghost', 'posion']
-        }
-
-    ];
+ 
+    let pokemonList = [];
+    let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
     function add(item) {
-        if (typeof (item) === "object") {
-            if (Object.keys(item) === Object.keys(pokemonList[0]))
+        if (typeof (item) === 'object') {
+            Object.keys
+           // if (JSON.stringify(Object.keys(item)) === JSON.stringify(Object.keys(pokemonList[0]))) {
                 pokemonList.push(item);
+            //}
+                
         }
     }
 
@@ -52,31 +30,69 @@ pokemonRepository = (function () {
         listItem.appendChild(button);                                   // Appending the button to the list <li> as a child
         container.appendChild(listItem);                                // Appending the <li> elements to the unordered list <ul> as its child
 
-        button.addEventListener('click', showDetails);                  // Creating the event handler
-
+        button.addEventListener('click', function(){                    // Creating the event handler
+            showDetails(pokemon)});                  
     }
 
-    function showDetails(event) {
-        console.log(event);
+    function showDetails(pokemon) {
+        loadDetails(pokemon).then(function () {
+            console.log(pokemon);
+        });        
+    }
+
+    //Fetch return a promise which is passed to first then function
+    function loadList() {
+        return fetch(apiUrl).then(function (response) {
+            return response.json();
+        }).then(function (json) {
+            json.results.forEach(function (item) {
+                let pokemon = {
+                    name: item.name,
+                    detailsUrl: item.url
+                };
+                add(pokemon);
+            }); //Why it need a ;
+        }).catch(function (e) {
+            console.error(e);
+        })
+    }
+
+    //DetailsUrl property to load the detailed data for a given Pokémon
+    function loadDetails(item) {
+        let url = item.detailsUrl;
+        return fetch(url).then(function (response) {
+            return response.json();     // Taking the json property from the objec(response)
+        }).then(function (details) {
+            // Now we add the details to the item
+            item.imageUrl = details.sprites.front_default;
+            item.height = details.height;
+            item.types = details.types;
+        }).catch(function (e) {
+            console.error(e);
+        });
     }
 
     return {
         getAll: getAll,
         add: add,
-        addListItem: addListItem
+        addListItem: addListItem,
+        loadList: loadList,
+        loadDetails: loadDetails
         
     };
 
 })();
 
-//pokemonRepository.add({ name: "Pikachu", height: 0.3, types: ["electric"] });   // Fix it
+// This function just add 'Pikachu' manually
+pokemonRepository.add({ name: 'Pikachu', height: 0.3, types: '[electric]' });   // Fix it
 
-pokemonList = pokemonRepository.getAll();
+// Get all the list of Pokemon to create a button with the name of each one
+// pokemonRepository.getAll().forEach(function(pokemon){
+//     pokemonRepository.addListItem(pokemon);
+// })
 
-pokemonList.forEach(pokemon => {
-
-    pokemonRepository.addListItem(pokemon);
-
+pokemonRepository.loadList().then(function (pokemon) {
+    pokemonRepository.getAll().forEach(function(pokemon) {
+        pokemonRepository.addListItem(pokemon);
+    });
 });
-
-
