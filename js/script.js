@@ -16,12 +16,12 @@ pokemonRepository = (function () {
 
     function addListItem(pokemon) {
 
-        let container = document.querySelector('.list-group');                // Taking the element <ul> using the class ".list-group"
+        let container = document.querySelector('.row');                // Taking the element <ul> using the class ".list-group"
                 
         let button = document.createElement('button');                        // Creating the buttons as <li> elements. Using the "list-group-item" class
         button.setAttribute("data-toggle", "modal");                          // Adds the attribute
         button.setAttribute("data-target", "#exampleModal");                  // 
-        button.classList.add("list-group-item", "list-group-item-action", "text-capitalize", "mt-1", "p-2", "border-0", "fs-5");                   // Appliying a the class "btn btn-primary" to the button
+        button.classList.add("col-2", "btn", "list-group-item-action");                   // Appliying a the class "btn btn-primary" to the button
         button.innerText = pokemon.name;                                      // Giving the "Pokemon's name" to the button
         
         container.appendChild(button);                                        // Appending the <buttons> elements to the unordered list <ul> as its child
